@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    </script>
+
+    <title>Calculator</title>
+    <link href="styles.css" rel="stylesheet"/>
+    <script src="help.js"></script>
+
+    <script src="index.js"></script>
+  </head>
+
+  <body>
+    <main>
+      <div class="container mt-3">
+        <div id="help">
+          <div class="d-flex justify-content-between">
+            <button id="helpButton" class="btn btn-info mt-3 ms-3">Help</button>
+            <button id="closeHelpButton" class="btn btn-dark mt-3 me-3"><strong>X</strong></button>
+          </div>
+          <div id="helpContents">
+            <p><strong><u>Features</u></strong></p>
+            <ol>
+              <li>
+                This calculator functions in between a traditional calculator and a
+                computer. In the upper display you may enter the calculation in
+                equation mode like <br />
+                52 - 89² + √67 + sin(89) - ln(87). <br />
+                Press the = key to get the result in the lower display field.
+              </li>
+              <li>
+                Select either the simple or scientific option and the corresponding
+                calculator will be displayed
+              </li>
+              <li>
+                For trignometric functions (sin, cos, tan) the default angle is in
+                radians. When degree is selected, the calculator will automatically
+                insert the multiplication factor for conversion into radians. You
+                may enter the degrees angle afterwards.
+              </li>
+              <li>
+                Similarly, for inverse trignometric functions the multiplication
+                factor for conversion of angle into degrees will be inserted
+                automatically.
+              </li>
+              <li>
+                Note that when any function key is pressed the corresponding
+                Javascript function is displayed in the upper equation display.
+                Don't be dismayed by that. e.g. sin(56) will be displayed as
+                Math.sin(56).
+                <strong>Don't forget to close the bracket otherwise calculation will not
+                  be done.</strong>
+              </li>
+              <li>Use the 2nd/1st function key to toggle between functions</li>
+            </ol>
+            <p><strong><u>Limitation</u></strong></p>
+            <ul>
+              <li style="color: red;">
+                Javascript math is not accurate for floating point
+                numbers. So sin(π) may yield an infinitesimally small (O(10e-16))
+                but non-zero number occassionally.
+              </li>
+            </ul>
+            <p style="text-align: right;"><b>Happy Calculating!</b></p>
+          </div>
+        </div>
+
+        <div id="calculator">
+          <!-- display field for equation and results displays-->
+          <div id="displayField">
+            <input id="equationField" class="form-control" />
+            <input id="resultField" class="form-control form-control-lg" />
+          </div>
+          <!-- selection for simple/scientific calculator -->
+          <div class="calcType" class="mx-auto">
+            <div class="row row-cols-4 mx-auto px-3">
+              <div class="col">
+                <input type="radio" id="simple" name="calcType" checked class=" form-check-input" /><label
+                  for="simple"
+                  class="ms-2 form-check-label">Simple</label>
+              </div>
+              <div class="col">
+                <input type="radio" id="scientific" name="calcType" class="form-check-input" /><label
+                  for="scientific"
+                  class="ms-2 form-check-label">Scientific</label>
+              </div>
+              <div class="col"></div>
+              <div class="col"></div>
+              <div class="col"></div>
+              <div class="col"></div>
+              <div class="col" style="visibility: hidden;" class="degRad" name="degRad">
+                <input type="radio" id="degree" name="degRad" class="form-check-input"><label
+                  for="degree" class="ms-2 form-check-label">Deg</label>
+              </div>
+              <div class="col" style="visibility: hidden;" class="degRad" name="degRad">
+                <input type="radio" id="radian" name="degRad" class="form-check-input"
+                  checked><label
+                  for="radian" class="ms-2 form-check-label">Rad</label>
+              </div>
+            </div>
+
+          </div>
+          <!-- Degree/radian -->
+          <!-- <div class="degRad"></div> -->
+          <!-- this div holds the simple calc buttons-->
+          <div id="simpleCalc" class="">
+            <button type="button" value="C" name="clear" class="btn btn-danger">C</button>
+            <button type="button" value=" ( " name="bracketOpen" class="btn btn-secondary">
+              (
+            </button>
+            <button type="button" value=" ) " name="bracketClose" class="btn btn-secondary">
+              )
+            </button>
+            <button type="button" value="backspace" name="backspace" class="btn btn-danger">&xlarr;</button>
+            <button type="button" value="7" name="seven" class="btn btn-secondary digit">
+              7
+            </button>
+            <button type="button" value="8" name="eight" class="btn btn-secondary digit">
+              8
+            </button>
+            <button type="button" value="9" name="nine" class="btn btn-secondary digit">
+              9
+            </button>
+            <button type="button" value=" / " name="divide" class="btn btn-secondary plusMinusSymbols" value="/">
+              &#247;
+            </button>
+            <button type="button" value="4" name="four" class="btn btn-secondary digit">
+              4
+            </button>
+            <button type="button" value="5" name="five" class="btn btn-secondary digit">
+              5
+            </button>
+            <button type="button" value="6" name="six" class="btn btn-secondary digit">
+              6
+            </button>
+            <button type="button" name="multiply" value=" * " class="btn btn-secondary plusMinusSymbols">
+              &#215;
+            </button>
+            <button type="button" value="1" name="one" class="btn btn-secondary digit">
+              1
+            </button>
+            <button type="button" value="2" name="two" class="btn btn-secondary digit">
+              2
+            </button>
+            <button type="button" value="3" name="three" class="btn btn-secondary digit">
+              3
+            </button>
+            <button type="button" value=" - " name="minus" class="btn btn-secondary plusMinusSymbols">
+              -
+            </button>
+            <button type="button" value="." name="point" class="btn btn-secondary">
+              .
+            </button>
+            <button type="button" value="0" name="zero" class="btn btn-secondary digit">
+              0
+            </button>
+            <button type="button" value=" , " name="comma" class="btn btn-secondary">
+              ,
+            </button>
+            <button type="button" value=" + " name="plus" class="btn btn-secondary plusMinusSymbols">
+              +
+            </button>
+            <button type="button" name="plusMinus" value="plusMinus" class="btn btn-warning">+/-</button>
+            <button type="button" name="answer" value="answer" class="btn btn-primary">Ans</button>
+            <button type="button" name="equalButton" value=" = " class="btn btn-success" id="equalButton">=</button>
+          </div>
+          <!-- this div holds the scientific calc buttons-->
+          <!-- see that the mathematical displays like power etc are taken from the W3.org XML above, see the head tag for details-->
+          <div id="scientificCalc" style="display: none;">
+            <button type="button" name="second" class="btn ">
+              2<sup>nd</sup>
+            </button>
+            <button type="button" value="1 / ( " name="inverse" class="btn btn-secondary mathFunctions">
+              1/x
+            </button>
+            <button type="button" name="fact( " value="fact( " class="btn btn-secondary mathFunctions">
+              x!
+            </button>
+            <button type="button" value="Math.pow( " name="power" class="btn btn-secondary" id="anyPower">
+              y &#879;
+            </button>
+            <button type="button" name="square( " value="square( " class="btn btn-secondary mathFunctions">
+              x<sup>2</sup>
+            </button>
+            <button type="button" value="Math.sqrt( " name="squareRoot" class="btn btn-secondary mathFunctions">
+              &radic;
+            </button>
+            <button type="button" name="cube( " value="cube( " class="btn btn-secondary mathFunctions">
+              x<sup>3</sup>
+            </button>
+            <button type="button" value="Math.cbrt( " name="cubeRoot" class="btn btn-secondary mathFunctions">
+              &#x221B;
+            </button>
+            <button type="button" value="Math.sin( " name="sin" class="btn btn-secondary firstFun mathFunctions trigno">
+              sin
+            </button>
+            <button type="button" value="Math.cos( " name="cos" class="btn btn-secondary firstFun mathFunctions trigno">
+              cos
+            </button>
+            <button type="button" value="Math.tan( " name="tan" class="btn btn-secondary firstFun mathFunctions trigno">
+              tan
+            </button>
+            <button type="button" value="Math.PI" name="pi" class="btn btn-secondary mathConstant firstFun">
+              &#8508;</button>
+            <button type="button" value="Math.asin( " name="sinInv"
+              class="btn btn-secondary secondFun mathFunctions trignoInv">
+              sin&#8315;&#185;
+            </button>
+            <button type="button" value="Math.acos( " name="cosInv"
+              class="btn btn-secondary secondFun mathFunctions trignoInv">
+              cos&#8315;&#185;
+            </button>
+            <button type="button" value="Math.atan( " name="tanInv"
+              class="btn btn-secondary secondFun mathFunctions trignoInv">
+              tan&#8315;&#185;
+            </button>
+            <button type="button" value="Math.E" name="eulerConstt" class="btn btn-secondary mathConstant secondFun">
+              e
+            </button>
+            <button type="button" value="Math.sinh( " name="sinh" class="btn btn-secondary firstFun mathFunctions">
+              sinh
+            </button>
+            <button type="button" value="Math.cosh( " name="cosh" class="btn btn-secondary firstFun mathFunctions">
+              cosh
+            </button>
+            <button type="button" value="Math.tanh( " name="tanh" class="btn btn-secondary firstFun mathFunctions">
+              tanh
+            </button>
+            <button type="button" name="e" value="e" class="btn btn-secondary firstFun">
+              EE
+            </button>
+            <button type="button" value="Math.asinh( " name="sinhInv" class="btn btn-secondary secondFun mathFunctions">
+              sinh&#8315;&#185;
+            </button>
+            <button type="button" value="Math.acosh( " name="coshInv" class="btn btn-secondary secondFun mathFunctions">
+              cosh&#8315;&#185;
+            </button>
+            <button type="button" value="Math.atanh( " name="tanhInv" class="btn btn-secondary secondFun mathFunctions">
+              tanh&#8315;&#185;
+            </button>
+            <button type="button" value="Math.random()" name="randomFun" class="btn btn-secondary secondFun">
+              Rand
+            </button>
+            <button type="button" value="Math.exp(" name="expo" class="btn btn-secondary mathFunctions">
+              e<sup>x</sup>
+            </button>
+            <button type="button" value="Math.log(" name="ln" class="btn btn-secondary mathFunctions">
+              ln
+            </button>
+            <button type="button" value="Math.pow(10 , " name="expo10" class="btn btn-secondary mathFunctions">
+              10<sup>x</sup>
+            </button>
+            <button type="button" value="Math.log10(" name="log10" class="btn btn-secondary mathFunctions">
+              log<sub>10</sub>
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+    <div class="container">
+      <footer class="footer mt-auto py-3"><span class="text-muted">Developed by: Sunpreet</span></footer>
+    </div>
+  </body>
+
+</html>
