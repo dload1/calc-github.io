@@ -39,14 +39,14 @@ button#closeHelpButton {
 /* styling for the equation field */
 #equationField {
     font-style: italic;
-    font-size: 2vw;
+    font-size: 2ch;
     background-color: darkslategray;
     color: azure;
 }
 
 /* styling for the result field */
 #resultField {
-    font-size: 3vw;
+    font-size: 3ch;
     height: 10%;
     text-align: end;
     background-color: black;
