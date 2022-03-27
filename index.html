@@ -1,3 +1,4 @@
+<!-- A Simple/Scientific Calc developed by Sunpreet-->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,14 +14,16 @@
 
     <title>Calculator</title>
     <link href="styles.css" rel="stylesheet"/>
-    <script src="help.js"></script>
 
+    <!-- JS files for help and calc portions -->
+    <script src="help.js"></script>
     <script src="index.js"></script>
   </head>
 
   <body>
     <main>
       <div class="container mt-3">
+        <!-- help portion -->
         <div id="help">
           <div class="d-flex justify-content-between">
             <button id="helpButton" class="btn btn-info mt-3 ms-3">Help</button>
@@ -68,20 +71,26 @@
                 numbers. So sin(π) may yield an infinitesimally small (O(10e-16))
                 but non-zero number occassionally.
               </li>
+              <li>Ensure that the equation entered is syntactically correct. All the opened brackets must be closed.</li>
             </ul>
             <p style="text-align: right;"><b>Happy Calculating!</b></p>
           </div>
         </div>
 
+        <!-- HTML for calculator -->
         <div id="calculator">
+
           <!-- display field for equation and results displays-->
-          <div id="displayField">
-            <input id="equationField" class="form-control" />
-            <input id="resultField" class="form-control form-control-lg" />
+          <div id="displayField" class="my-2">
+            <input id="equationField" class="form-control" readonly/>
+            <input id="resultField" class="form-control form-control-lg" readonly/>
           </div>
+
           <!-- selection for simple/scientific calculator -->
-          <div class="calcType" class="mx-auto">
+          <div class="mx-auto">
             <div class="row row-cols-4 mx-auto px-3">
+
+              <!-- first row has the simple/scientific calc options -->
               <div class="col">
                 <input type="radio" id="simple" name="calcType" checked class=" form-check-input" /><label
                   for="simple"
@@ -94,6 +103,8 @@
               </div>
               <div class="col"></div>
               <div class="col"></div>
+
+              <!-- the following row is for deg/rad buttons -->
               <div class="col"></div>
               <div class="col"></div>
               <div class="col" style="visibility: hidden;" class="degRad" name="degRad">
@@ -106,12 +117,11 @@
                   for="radian" class="ms-2 form-check-label">Rad</label>
               </div>
             </div>
-
           </div>
-          <!-- Degree/radian -->
-          <!-- <div class="degRad"></div> -->
-          <!-- this div holds the simple calc buttons-->
-          <div id="simpleCalc" class="">
+
+          <!-- HTML for the simple calc-->
+          <div id="simpleCalc">
+
             <button type="button" value="C" name="clear" class="btn btn-danger">C</button>
             <button type="button" value=" ( " name="bracketOpen" class="btn btn-secondary">
               (
@@ -130,7 +140,7 @@
               9
             </button>
             <button type="button" value=" / " name="divide" class="btn btn-secondary plusMinusSymbols" value="/">
-              &#247;
+              <b>&#247;</b>
             </button>
             <button type="button" value="4" name="four" class="btn btn-secondary digit">
               4
@@ -142,7 +152,7 @@
               6
             </button>
             <button type="button" name="multiply" value=" * " class="btn btn-secondary plusMinusSymbols">
-              &#215;
+              <b>x</b>
             </button>
             <button type="button" value="1" name="one" class="btn btn-secondary digit">
               1
@@ -154,7 +164,7 @@
               3
             </button>
             <button type="button" value=" - " name="minus" class="btn btn-secondary plusMinusSymbols">
-              -
+              <b>-</b>
             </button>
             <button type="button" value="." name="point" class="btn btn-secondary">
               .
@@ -166,14 +176,15 @@
               ,
             </button>
             <button type="button" value=" + " name="plus" class="btn btn-secondary plusMinusSymbols">
-              +
+              <b>+</b>
             </button>
             <button type="button" name="plusMinus" value="plusMinus" class="btn btn-warning">+/-</button>
             <button type="button" name="answer" value="answer" class="btn btn-primary">Ans</button>
             <button type="button" name="equalButton" value=" = " class="btn btn-success" id="equalButton">=</button>
           </div>
+
           <!-- this div holds the scientific calc buttons-->
-          <!-- see that the mathematical displays like power etc are taken from the W3.org XML above, see the head tag for details-->
+          <!-- the default display is none, shown only when the scientific option is selected -->
           <div id="scientificCalc" style="display: none;">
             <button type="button" name="second" class="btn ">
               2<sup>nd</sup>
@@ -265,6 +276,8 @@
         </div>
       </div>
     </main>
+
+    <!-- HTML for the footer -->
     <div class="container">
       <footer class="footer mt-auto py-3"><span class="text-muted">Developed by: Sunpreet</span></footer>
     </div>
