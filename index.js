@@ -112,6 +112,7 @@ document.addEventListener("DOMContentLoaded", function () {
   let buttons = document.querySelectorAll(".btn");
   // ans holds the last evaluated result
   let ans;
+  let mem = NaN;
 
   // actions to be performed for individual button press
   for (let item of buttons) {
@@ -137,7 +138,7 @@ document.addEventListener("DOMContentLoaded", function () {
           result.value = "";
           break;
 
-        // these code blocks are for showing the 2nd function row and hiding the first one
+          // these code blocks are for showing the 2nd function row and hiding the first one
         case "second":
           for (let i = 0; i < firstFunRows.length; i++) {
             firstFunRows[i].style.display = "none";
@@ -147,7 +148,7 @@ document.addEventListener("DOMContentLoaded", function () {
           item.innerHTML = "1<sup>st</sup>";
           break;
 
-        // this case switches the 1st function row back altering the display properties of the two
+          // this case switches the 1st function row back altering the display properties of the two
         case "first":
           for (let i = 0; i < firstFunRows.length; i++) {
             firstFunRows[i].style.display = "grid";
@@ -157,13 +158,13 @@ document.addEventListener("DOMContentLoaded", function () {
           item.innerHTML = "2<sup>nd</sup>";
           break;
 
-        // answer shows the last evaluated result
+          // answer shows the last evaluated result
         case "answer":
           equation.value = ans;
           result.value = "";
           break;
 
-        // change the plus/minus sign of the display/result value
+          // change the plus/minus sign of the display/result value
         case "plusMinus":
           // check if the equation field ends in =, i.e. if it was evaluated
           if (equation.value.slice(-1) == "=") {
@@ -176,6 +177,10 @@ document.addEventListener("DOMContentLoaded", function () {
           else if (equation.value.slice(0, 1) == "-")
             equation.value = equation.value.slice(1);
           else equation.value = "-" + equation.value;
+          break;
+
+        case "percent":
+          equation.value += " / 100";
           break;
 
         default:
